@@ -1,0 +1,5 @@
+[user]
+	name = Mark Perryman
+	email = mark.perryman@metaswitch.com
+[push]
+	default = simple
