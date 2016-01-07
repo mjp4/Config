@@ -16,8 +16,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=100000
+HISTFILESIZE=100000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -145,7 +145,7 @@ Host="\h"
 # This PS1 snippet was adopted from code for MAC/BSD I saw from: http://allancraig.net/index.php?option=com_content&view=article&id=108:ps1-export-command-for-git&catid=45:general&Itemid=96
 # I tweaked it to work on UBUNTU 11.04 & 11.10 plus made it mo' better
 
-export PS1=$IBlack$Time24a\ $Host$Color_Off'$(git branch &>/dev/null;\
+export PS1=$IBlack$Time24a\ $White$Host$Color_Off'$(git branch &>/dev/null;\
 if [ $? -eq 0 ]; then \
   echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
   if [ "$?" -eq "0" ]; then \
@@ -154,10 +154,10 @@ if [ $? -eq 0 ]; then \
   else \
     # @5 - Changes to working tree
     echo "'$IRed'"$(__git_ps1 " {%s}"); \
-  fi) '$Cyan$PathShort$Color_Off$IBlack'\$'$Color_Off' "; \
+  fi) '$Cyan$PathShort$Color_Off$White'\$'$Color_Off' "; \
 else \
   # @2 - Prompt when not in GIT repo
-  echo " '$Cyan$PathShort$Color_Off$IBlack'\$'$Color_Off' "; \
+  echo " '$Cyan$PathShort$Color_Off$White'\$'$Color_Off' "; \
 fi)'
 
 #if [ "$color_prompt" = yes ]; then
