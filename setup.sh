@@ -21,4 +21,4 @@ ln -s $DIR/.vim/ftplugin ~/.vim/
 
 mkdir $DIR/.ssh
 mv ~/.ssh/config ~/.ssh/config~
-ln -s $DIR/Config/.ssh/config ~/.ssh/
+ln -s $DIR/.ssh/config ~/.ssh/
