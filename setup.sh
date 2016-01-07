@@ -1,6 +1,8 @@
 #! /bin/bash
 
 DIR="$( cd "$( dirname "$0" )" && pwd )"
+echo $DIR
+exit
 
 for filename in `ls -a $DIR`
 do
@@ -12,13 +14,21 @@ do
         fi
         ln -s $DIR/$filename ~/$filename && echo "Linked ~/$filename to $DIR/$filename"
     fi
-
 done
 
-mkdir $DIR/.vim
-mv ~/.vim/ftplugin ~/.vim/ftplugin~
-ln -s $DIR/.vim/ftplugin ~/.vim/
+for dirname in `ls -a $DIR`
+do
+    for filename in `ls -a $DIR/$dirname`
+    do
+        if [ -e $DIR/$dirname/$filename ]
+        then
+            if [ -e ~/$dirname/$filename -a ! -h ~/$dirname/$filename ]
+            then
+                mv ~/$dirname/$filename ~/$dirname/$filename~ && echo "Backed up existing ~/$filename"
+            fi
+            ln -s $DIR/$dirname/$filename ~/$dirname/$filename && echo "Linked ~/$filename to $DIR/$filename"
+        fi
+    done
+done
 
-mkdir $DIR/.ssh
-mv ~/.ssh/config ~/.ssh/config~
-ln -s $DIR/.ssh/config ~/.ssh/
+chmod og= $DIR/.ssh/config
