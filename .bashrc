@@ -146,7 +146,7 @@ Host="\h"
 # I tweaked it to work on UBUNTU 11.04 & 11.10 plus made it mo' better
 
 export PS1=$BBlack$Time24a\ $White$Host$Color_Off'$(git branch &>/dev/null;\
-if [ $? -eq 0 -a `type -t __git_ps1` ]; then \
+if [ $? -eq 0 -a `type -t __git_ps1 > /dev/null 2>&1` ]; then \
   echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
   if [ "$?" -eq "0" ]; then \
     # @4 - Clean repository - nothing to commit
