@@ -24,14 +24,25 @@ do
             then
                 mv ~/$dirname/$filename ~/$dirname/$filename~ && echo "Backed up existing ~/$filename"
             fi
+            mkdir ~/$dirname
             ln -s $DIR/$dirname/$filename ~/$dirname/$filename && echo "Linked ~/$filename to $DIR/$filename"
         done
     fi
 done
 
 chmod og= $DIR/.ssh/config
+
+# Install Vim Bundles
 if [ -d $DIR/.vim -a ! -d $DIR/.vim/bundle ]
 then
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     vim -i NONE -c VundleUpdate -c quitall
 fi
+
+# Install standard desired programs.
+DesiredPrograms="vim git openssh tmux"
+yum install $DesiredPrograms ||\
+sudo yum install $DesiredPrograms ||\
+apt-get install $DesiredPrograms ||\
+sudo apt-get install $DesiredPrograms ||\
+echo "No Package Manager available"
