@@ -30,3 +30,8 @@ do
 done
 
 chmod og= $DIR/.ssh/config
+if [ -d $DIR/.vim -a ! -d $DIR/.vim/bundle ]
+then
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    vim -i NONE -c VundleUpdate -c quitall
+fi
