@@ -22,10 +22,10 @@ do
         do
             if [ -e ~/$dirname/$filename -a ! -h ~/$dirname/$filename ]
             then
-                mv ~/$dirname/$filename ~/$dirname/$filename~ && echo "Backed up existing ~/$filename"
+                mv ~/$dirname/$filename ~/$dirname/$filename~ && echo "Backed up existing ~/$dirname/$filename"
             fi
             mkdir ~/$dirname
-            ln -s $DIR/$dirname/$filename ~/$dirname/$filename && echo "Linked ~/$filename to $DIR/$filename"
+            ln -s $DIR/$dirname/$filename ~/$dirname/ && echo "Linked ~/$filename to $DIR/$dirname/$filename"
         done
     fi
 done
@@ -33,7 +33,7 @@ done
 chmod og= $DIR/.ssh/config
 
 # Install Vim Bundles
-if [ -d $DIR/.vim -a ! -d $DIR/.vim/bundle ]
+if [ -d $DIR/.vim -a ! -f ~/.vim/bundle/Vundle.vim ]
 then
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     vim -i NONE -c VundleUpdate -c quitall
