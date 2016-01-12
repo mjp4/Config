@@ -142,8 +142,10 @@ NewLine="\n"
 Jobs="\j"
 Host="\h" #MJP4
 
-# This PS1 snippet was adopted from code for MAC/BSD I saw from: http://allancraig.net/index.php?option=com_content&view=article&id=108:ps1-export-command-for-git&catid=45:general&Itemid=96
-# I tweaked it to work on UBUNTU 11.04 & 11.10 plus made it mo' better
+if [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]
+then
+    . /usr/share/git-core/contrib/completion/git-prompt.sh
+fi
 
 export PS1=$IBlack$Time24a\ $White$Host$Color_Off'$(git branch &>/dev/null;\
 if [ $? -eq 0 -a "`type -t __git_ps1`" ]; then \
@@ -160,23 +162,18 @@ else \
   echo " '$Cyan$PathShort$Color_Off$White'\$'$Color_Off' "; \
 fi)'
 
-#if [ "$color_prompt" = yes ]; then
-#    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-#else
-#    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-#fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    PS1="\[\e]0;\u@\h: \w\a\]$PS1"
     ;;
 *)
     ;;
 esac
 
-# enable color support of ls and also add handy aliases
+# Enable color support of ls and other commands
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
@@ -188,13 +185,8 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -l'
-alias la='ls -A'
-alias l='ls -CF'
+# Colored GCC warnings and errors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like

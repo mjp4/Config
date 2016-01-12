@@ -2,7 +2,7 @@
 
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
-for filename in `ls -a $DIR`
+for filename in `ls -A $DIR`
 do
     if [ -f $DIR/$filename -a $filename != "setup.sh" ]
     then
@@ -12,13 +12,37 @@ do
         fi
         ln -s $DIR/$filename ~/$filename && echo "Linked ~/$filename to $DIR/$filename"
     fi
-
 done
 
-mkdir $DIR/.vim
-mv ~/.vim/ftplugin ~/.vim/ftplugin~
-ln -s $DIR/.vim/ftplugin ~/.vim/
+for dirname in `ls -A $DIR`
+do
+    if [ -d $DIR/$dirname -a $dirname != ".git" ]
+    then 
+        for filename in `ls -A $DIR/$dirname`
+        do
+            if [ -e ~/$dirname/$filename -a ! -h ~/$dirname/$filename ]
+            then
+                mv ~/$dirname/$filename ~/$dirname/$filename~ && echo "Backed up existing ~/$filename"
+            fi
+            mkdir ~/$dirname
+            ln -s $DIR/$dirname/$filename ~/$dirname/$filename && echo "Linked ~/$filename to $DIR/$filename"
+        done
+    fi
+done
 
-mkdir $DIR/.ssh
-mv ~/.ssh/config ~/.ssh/config~
-ln -s $DIR/.ssh/config ~/.ssh/
+chmod og= $DIR/.ssh/config
+
+# Install Vim Bundles
+if [ -d $DIR/.vim -a ! -d $DIR/.vim/bundle ]
+then
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    vim -i NONE -c VundleUpdate -c quitall
+fi
+
+# Install standard desired programs.
+DesiredPrograms="vim git openssh tmux"
+yum install $DesiredPrograms ||\
+sudo yum install $DesiredPrograms ||\
+apt-get install $DesiredPrograms ||\
+sudo apt-get install $DesiredPrograms ||\
+echo "No Package Manager available"
