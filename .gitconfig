@@ -20,3 +20,11 @@
     tool = vimdiff
 [merge]
     tool = vimdiff
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+    ui = true
+    pager = true
