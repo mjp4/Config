@@ -28,6 +28,8 @@ Plugin 'janko-m/vim-test'
 Plugin 'christoomey/vim-tmux-navigator'
 let test#strategy = "dispatch"
 
+Plugin 'vim-scripts/DirDiff.vim'
+
 call vundle#end()
 
 filetype plugin indent on
@@ -42,7 +44,7 @@ let python_highlight_all = 1
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 
@@ -162,7 +164,7 @@ augroup ActiveWindow
     autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
     autocmd VimEnter,WinEnter,BufWinEnter * setlocal relativenumber
     autocmd VimEnter,WinEnter,BufWinEnter * setlocal number
-    autocmd VimEnter,WinEnter,BufWinEnter * wincmd =
+"    autocmd VimEnter,WinEnter,BufWinEnter * wincmd =
     autocmd WinLeave * setlocal nocursorline
     autocmd WinLeave * setlocal norelativenumber
     autocmd WinLeave * setlocal nonumber
