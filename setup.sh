@@ -40,9 +40,9 @@ then
 fi
 
 # Install standard desired programs.
-DesiredPrograms="vim git openssh tmux"
-yum install $DesiredPrograms ||\
-sudo yum install $DesiredPrograms ||\
-apt-get install $DesiredPrograms ||\
-sudo apt-get install $DesiredPrograms ||\
-echo "No Package Manager available"
+#DesiredPrograms="vim git openssh tmux"
+#yum install $DesiredPrograms ||\
+#sudo yum install $DesiredPrograms ||\
+#apt-get install $DesiredPrograms ||\
+#sudo apt-get install $DesiredPrograms ||\
+#echo "No Package Manager available"
