@@ -35,6 +35,12 @@ call vundle#end()
 filetype plugin indent on
 filetype plugin on
 
+augroup Filetypes
+    autocmd BufNewFile,BufRead inttrc* set filetype=inttrc
+    autocmd BufNewFile,BufRead ipstrc*.drw set filetype=ipstrc_drw
+    autocmd BufNewFile,BufRead ipstrc*.dmp set filetype=ipstrc_dmp
+augroup END
+
 syntax enable
 let python_highlight_all = 1
 
