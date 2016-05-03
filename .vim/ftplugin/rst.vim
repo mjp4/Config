@@ -20,3 +20,6 @@ augroup RstOnly
   autocmd!
   autocmd BufWritePost *.rst call DocBuild()
 augroup END
+
+set formatlistpat=\\v^\\s*(\\d+\\|#\\|\*)[\\]:.)}\\t\ ]\\s*
+set formatoptions+=n

@@ -29,6 +29,12 @@ Plugin 'christoomey/vim-tmux-navigator'
 let test#strategy = "dispatch"
 
 Plugin 'vim-scripts/DirDiff.vim'
+Plugin 'sukima/xmledit'
+
+Plugin 'Rykka/riv.vim'
+let g:riv_fold_level = 2
+
+Plugin 'lervag/vimtex'
 
 call vundle#end()
 
@@ -188,9 +194,9 @@ highlight LineNr ctermbg=238 ctermfg=250 cterm=bold
 highlight Folded ctermbg=NONE cterm=bold
 highlight CursorLineNr ctermbg=238 ctermfg=white cterm=NONE
 highlight Special ctermfg=202
-highlight Search ctermfg=white
+"highlight Search ctermfg=white
 
 highlight StatusLine ctermbg=231 ctermfg=16
 highlight StatusLineNC ctermbg=231 ctermfg=16
 highlight VertSplit ctermbg=231 ctermfg=16
-set fillchars=stl:-,stlnc:-,vert:│,fold:-
+set fillchars=stl:-,stlnc:-,vert:\|,fold:-
