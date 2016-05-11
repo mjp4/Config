@@ -1,4 +1,3 @@
-set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -38,7 +37,6 @@ Plugin 'lervag/vimtex'
 
 call vundle#end()
 
-filetype plugin indent on
 filetype plugin on
 
 augroup Filetypes
@@ -49,10 +47,6 @@ augroup END
 
 syntax enable
 let python_highlight_all = 1
-
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -79,9 +73,7 @@ set nomodeline
 set tabstop=4
 set shiftwidth=4
 set shiftround
-set smarttab
 set expandtab
-set autoindent
 set copyindent
 
 " Overwritten in an autocmd
@@ -89,11 +81,8 @@ set nonumber
 set norelativenumber
 
 set showmatch
-set hlsearch
-set incsearch
 set scrolloff=999
 
-set history=1000
 set undolevels=1000
 set title
 set visualbell
@@ -102,10 +91,6 @@ set winwidth=86
 set winminwidth=40
 
 set autochdir
-
-set list
-set listchars=
-autocmd filetype py set listchars+=tab:>.
 
 set pastetoggle=<F2>
 
