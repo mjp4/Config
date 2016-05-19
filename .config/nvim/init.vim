@@ -1,41 +1,51 @@
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/syntastic'
-let g:syntastic_rst_checkers = ['sphinx']
-let g:syntastic_rst_sphinx_quiet_messages = { "level": "warning" }
-let g:syntastic_aggregate_errors = 1
+set runtimepath^=~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
+call dein#begin(expand('~/.cache/dein'))
 
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-repeat'
-Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'hdima/python-syntax'
-Plugin 'tmhedberg/SimpylFold'
+call dein#add('Shougo/dein.vim')
+call dein#add('Shougo/deoplete.nvim')       " Auto completion
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources = {}
+let g:deoplete#sources.scala = ['buffer', 'tag']
+let g:deoplete#tag#cache_limit_size = 40000000
+set tags=tags;/
 
-Plugin 'tpope/vim-surround'
-Plugin 'ervandew/supertab'
+call dein#add('tpope/vim-unimpaired')       " Commands such as [<space> for new line
+call dein#add('tpope/vim-fugitive')         " Git support.
+call dein#add('tpope/vim-dispatch')         " Run background jobs.
+call dein#add('tpope/vim-surround')         " For example surround with quotes, ...
+call dein#add('tpope/vim-repeat')           " Allows . repeating for more functions
+call dein#add('tpope/vim-abolish')          " Quickly convert cases
+call dein#add('tpope/vim/commentary')       " Comment code using gc{movement}
+call dein#add('radenling/vim-dispatch-neovim')  " Use neovim terminal with dispatch
+call dein#add('christoomey/vim-tmux-navigator') " Support for seamless tmux window support.
+call dein#add('vim-airline/vim-airline')    " Pretty status line
+call dein#add('airblade/vim-gitgutter')     " Git changes in gutter
 
-Plugin 'davidhalter/jedi-vim'
-let g:jedi#show_call_signatures = "0"
+call dein#add('scrooloose/nerdcommenter')   " Better code commenting
+call dein#add('derekwyatt/vim-scala')       " Support for scala.
+call dein#add('ctrlpvim/ctrlp.vim')
+call dein#end()
 
-Plugin 'janko-m/vim-test'
-Plugin 'christoomey/vim-tmux-navigator'
-let test#strategy = "dispatch"
-
-Plugin 'vim-scripts/DirDiff.vim'
-Plugin 'sukima/xmledit'
-
-Plugin 'Rykka/riv.vim'
-let g:riv_fold_level = 2
-
-Plugin 'lervag/vimtex'
-
-call vundle#end()
+"Plugin 'scrooloose/syntastic'
+"let g:syntastic_rst_checkers = ['sphinx']
+"let g:syntastic_rst_sphinx_quiet_messages = { "level": "warning" }
+"let g:syntastic_aggregate_errors = 1
+"
+"Plugin 'hynek/vim-python-pep8-indent'
+"Plugin 'hdima/python-syntax'
+"Plugin 'tmhedberg/SimpylFold'
+"Plugin 'ervandew/supertab'
+"Plugin 'davidhalter/jedi-vim'
+"let g:jedi#show_call_signatures = "0"
+"Plugin 'janko-m/vim-test'
+"let test#strategy = "dispatch"
+"Plugin 'vim-scripts/DirDiff.vim'
+"Plugin 'sukima/xmledit'
+"Plugin 'Rykka/riv.vim'
+"let g:riv_fold_level = 2
+"Plugin 'lervag/vimtex'
 
 filetype plugin on
 
@@ -57,7 +67,7 @@ let g:syntastic_check_on_wq = 0
 let mapleader=","
 
 nnoremap <silent> <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <silent> <leader>sv :source $MYVIMRC<cr>
+nnoremap <silent> <leader>sv :source $MYVIMRC<cr>:e<cr>
 
 nnoremap <silent> <leader>tn :TestNearest<cr>
 nnoremap <silent> <leader>tf :TestFile<cr>
@@ -69,6 +79,7 @@ nnoremap <leader>w :vertical resize 84<cr>
 
 set background=dark
 
+set mouse=
 set nomodeline
 set tabstop=4
 set shiftwidth=4
@@ -91,6 +102,7 @@ set winwidth=86
 set winminwidth=40
 
 set autochdir
+set wildignore+=*.swp,*.class,*target/*,*.vsd
 
 set pastetoggle=<F2>
 
@@ -148,7 +160,7 @@ function! DocBuild()
         silent! execute "Dispatch! sphinx-build -va " . docdir . " " . docdir . "build/html"
         silent! execute "Dispatch! sphinx-build -va " . docdir . "source/ " . docdir . "build/html"
     elseif &filetype == 'rst'
-        call Rst2("html") | call Rst2("pdf") 
+        call Rst2("html") | call Rst2("pdf")
     else
         make
     endif

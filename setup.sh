@@ -40,7 +40,7 @@ then
 fi
 
 # Install standard desired programs.
-DesiredPrograms="vim git openssh tmux sshfs"
+DesiredPrograms="vim git openssh tmux sshfs python3 python3-pip"
 yum install $DesiredPrograms ||\
 sudo yum install $DesiredPrograms ||\
 apt-get install $DesiredPrograms ||\
