@@ -1,6 +1,7 @@
 set nocompatible
 filetype off
 
+if !has("compatible")
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
@@ -37,6 +38,7 @@ let g:riv_fold_level = 2
 Plugin 'lervag/vimtex'
 
 call vundle#end()
+endif
 
 filetype plugin indent on
 filetype plugin on
