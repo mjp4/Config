@@ -17,7 +17,7 @@ call dein#add('tpope/vim-dispatch')         " Run background jobs.
 call dein#add('tpope/vim-surround')         " For example surround with quotes, ...
 call dein#add('tpope/vim-repeat')           " Allows . repeating for more functions
 call dein#add('tpope/vim-abolish')          " Quickly convert cases
-call dein#add('tpope/vim/commentary')       " Comment code using gc{movement}
+call dein#add('tpope/vim-commentary')       " Comment code using gc{movement}
 call dein#add('radenling/vim-dispatch-neovim')  " Use neovim terminal with dispatch
 call dein#add('christoomey/vim-tmux-navigator') " Support for seamless tmux window support.
 call dein#add('vim-airline/vim-airline')    " Pretty status line
@@ -25,7 +25,10 @@ call dein#add('airblade/vim-gitgutter')     " Git changes in gutter
 
 call dein#add('scrooloose/nerdcommenter')   " Better code commenting
 call dein#add('derekwyatt/vim-scala')       " Support for scala.
-call dein#add('ctrlpvim/ctrlp.vim')
+let g:scala_scaladoc_indent = 1
+"call dein#add('ctrlpvim/ctrlp.vim')
+call dein#add('junegunn/fzf', { 'build': './install', 'merged': 0 })
+call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 call dein#end()
 
 "Plugin 'scrooloose/syntastic'
@@ -47,7 +50,19 @@ call dein#end()
 "let g:riv_fold_level = 2
 "Plugin 'lervag/vimtex'
 
+"see :help airline | airline-customisations
+let g:airline#extensions#default#section_truncate_width = {
+    \ 'b': 119,
+    \ 'x': 110,
+    \ 'y': 128,
+    \ 'z': 65,
+    \ 'warning': 80,
+    \ 'error': 80,
+    \ }
+
+
 filetype plugin on
+filetype plugin indent on
 
 augroup Filetypes
     autocmd BufNewFile,BufRead inttrc* set filetype=inttrc
@@ -127,6 +142,8 @@ noremap <C-l> <C-w>l
 
 noremap <silent> <leader>\ :nohlsearch<CR>:Windo ccl<bar>lcl<CR>
 
+noremap <C-P> :GitFiles<CR>
+
 " Like windo but restore the current window.
 function! WinDo(command)
     let currwin=winnr()
@@ -136,7 +153,7 @@ endfunction
 com! -nargs=+ -complete=command Windo call WinDo(<q-args>)
 
 " Remove trailing whitespace
-noremap dt :s/\v\s+$//<CR>:nohlsearch<CR>
+noremap dt :%s/\v\s+$//<CR>:nohlsearch<CR>
 
 cnoremap w!! w !sudo tee % >/dev/null
 
