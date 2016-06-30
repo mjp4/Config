@@ -139,10 +139,13 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
+tnoremap <C-j> <C-n>
+tnoremap <C-k> <C-p>
 
 noremap <silent> <leader>\ :nohlsearch<CR>:Windo ccl<bar>lcl<CR>
 
 noremap <C-P> :GitFiles<CR>
+noremap <M-p> "ayiw:GitFiles<CR><c-\><c-n>"api
 
 " Like windo but restore the current window.
 function! WinDo(command)
