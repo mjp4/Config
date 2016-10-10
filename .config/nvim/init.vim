@@ -24,12 +24,45 @@ call dein#add('vim-airline/vim-airline')    " Pretty status line
 call dein#add('airblade/vim-gitgutter')     " Git changes in gutter
 
 call dein#add('scrooloose/nerdcommenter')   " Better code commenting
-call dein#add('derekwyatt/vim-scala')       " Support for scala.
+call dein#add('mjp4/vim-scala')       " Support for scala.
 let g:scala_scaladoc_indent = 1
 "call dein#add('ctrlpvim/ctrlp.vim')
 call dein#add('junegunn/fzf', { 'build': './install', 'merged': 0 })
 call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+call dein#add('edkolev/tmuxline.vim')
 call dein#end()
+
+function! LongStringFormatter()
+    let lnum = v:lnum
+    let lcount = v:count
+    let le = lnum + lcount - 1
+    let lb = lnum
+    let nochange = 1
+    while lb <= le
+        exec "normal! ".(lb)."G"
+        if match(getline(lb), '" +$') >= 0 && match(getline(lb + 1), '^\s*"') >= 0 && lb + 1 <= le
+            exec "normal! J"
+            let le = le - 1
+        else
+            let lb = lb + 1
+        endif
+        s/" + "//g
+    endwhile
+
+    let lb = lnum
+    while lb <= le
+        if match(getline(lb), '^[^"]\{,40\}"') >= 0 && strlen(getline(lb)) > 80
+            exec "normal! ".(lb)."G77|F a\" +\r\""
+            let le = le + 1
+            let nochange = 0
+        else
+            let lb = lb + 1
+        endif
+    endwhile
+    return nochange
+endfunction
+
+set formatexpr=LongStringFormatter()
 
 "Plugin 'scrooloose/syntastic'
 "let g:syntastic_rst_checkers = ['sphinx']
@@ -50,6 +83,23 @@ call dein#end()
 "let g:riv_fold_level = 2
 "Plugin 'lervag/vimtex'
 
+let g:airline_theme_patch_func = 'AirlineThemePatch'
+function! AirlineThemePatch(palette)
+if g:airline_theme == 'dark'
+    for colors in values(a:palette.inactive)
+    let colors[2] = 245
+    endfor
+endif
+endfunction
+
+let g:tmuxline_powerline_separators = 0
+let g:tmuxline_separators = {
+    \ 'left' : '',
+    \ 'left_alt': '>',
+    \ 'right' : '',
+    \ 'right_alt' : '<',
+    \ 'space' : ' '}
+
 "see :help airline | airline-customisations
 let g:airline#extensions#default#section_truncate_width = {
     \ 'b': 119,
@@ -59,7 +109,16 @@ let g:airline#extensions#default#section_truncate_width = {
     \ 'warning': 80,
     \ 'error': 80,
     \ }
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#buffer_min_count = 0
+let g:airline#extensions#tabline#tab_min_count = 0
 
+nnoremap <silent> [g :tabprev<cr>
+nnoremap <silent> ]g :tabnext<cr>
+nnoremap <silent> [G :tabfirst<cr>
+nnoremap <silent> ]G :tablast<cr>
 
 filetype plugin on
 filetype plugin indent on
@@ -79,7 +138,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_wq = 0
 
 
-let mapleader=","
+let mapleader=" "
 
 nnoremap <silent> <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <silent> <leader>sv :source $MYVIMRC<cr>:e<cr>
@@ -101,6 +160,7 @@ set shiftwidth=4
 set shiftround
 set expandtab
 set copyindent
+set hidden
 
 " Overwritten in an autocmd
 set nonumber
@@ -143,6 +203,7 @@ tnoremap <C-j> <C-n>
 tnoremap <C-k> <C-p>
 
 noremap <silent> <leader>\ :nohlsearch<CR>:Windo ccl<bar>lcl<CR>
+noremap <silent> <leader>v :vsplit<cr>
 
 noremap <C-P> :GitFiles<CR>
 noremap <M-p> "ayiw:GitFiles<CR><c-\><c-n>"api
