@@ -11,3 +11,5 @@ ForegroundColour=255,255,255
 Blue=128,128,192
 BoldBlack=128,128,128
 CursorBlinks=no
+FontHeight=9
+FontIsBold=no
