@@ -15,6 +15,11 @@ noremap <silent> <leader>rh :call Rst2('html')<cr>
 noremap <silent> <leader>rp :call Rst2('pdf')<cr>
 noremap <silent> <leader>ro :call Rst2('odt')<cr>
 noremap <silent> <leader>rl :call Rst2('latex')<cr>
+noremap <silent> <leader>== yyp:s/./=/g<cr>:nohl<cr>yykPj
+noremap <silent> <leader>= yyp:s/./=/g<cr>:nohl<cr>
+noremap <silent> <leader>- yyp:s/./-/g<cr>:nohl<cr>
+noremap <silent> <leader>. yyp:s/././g<cr>:nohl<cr>
+noremap <silent> <leader>' yyp:s/./'/g<cr>:nohl<cr>
 
 augroup RstOnly
   autocmd!
