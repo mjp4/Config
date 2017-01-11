@@ -9,9 +9,9 @@ case $- in
 esac
 
 # Call default .bashrc if present
-if [ -f ~/.bashrc~ ]
+if [ -f $HOME/.bashrc~ ] && [ "$BASH_SOURCE" != "$HOME/.bashrc~" ]
 then
-    . ~/.bashrc~
+    . $HOME/.bashrc~
 fi
 
 # don't put duplicate lines or lines starting with space in the history.
