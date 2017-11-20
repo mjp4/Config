@@ -24,3 +24,16 @@ function s {
             l
         fi
 }
+
+alias sshOTPSimulators='sshpass -p !clearwater ssh clearwater@192.168.168.167 -t tmux attach-session -t otp'
+
+function sshwc {
+    if grep 'Permission denied' <(ssh -o PreferredAuthentications=publickey $@ exit 2>/dev/stdout) > /dev/null; then
+        sshpass -p\!clearwater ssh-copy-id $@ || sshpass -p\!bootstrap ssh-copy-id $@ || ssh-copy-id $@
+    fi
+    ssh $@
+}
+# With auto completion
+source /usr/share/bash-completion/completions/ssh
+complete -F _ssh sshwc
+
