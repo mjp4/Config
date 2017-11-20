@@ -150,6 +150,13 @@ nnoremap <silent> <leader>tl :TestLast<cr>
 
 nnoremap <leader>w :vertical resize 84<cr>
 
+inoremap <C-d>d <C-O>:read !date '+\%a \%d \%b \%y'<cr>
+inoremap <C-d>t <C-O>:read !date '+\%H:\%M'<cr>
+inoremap <C-d>w <C-O>:read !date --date='last Monday' '+w/c \%d/\%m/\%Y'<cr>
+inoremap <C-d>t <C-R>=strftime("%H:%M")<cr>
+inoremap <C-d>d <C-R>=strftime("%a %d %b %y")<cr>
+inoremap <C-d>w <C-R>=strftime("w/c %d/%m/%Y", system("date --date='last Monday' '+%s'"))<cr>
+":inoremap <F5> <C-R>=strftime("%c")<CR>
 
 set background=dark
 
