@@ -27,15 +27,30 @@ function s {
 
 alias sshOTPSimulators='sshpass -p !clearwater ssh clearwater@192.168.168.167 -t tmux attach-session -t otp'
 
+# SSH with key-copy
 function sshwc {
     if grep 'Permission denied' <(ssh -o PreferredAuthentications=publickey $@ exit 2>/dev/stdout) > /dev/null; then
         sshpass -p\!clearwater ssh-copy-id $@ || sshpass -p\!bootstrap ssh-copy-id $@ || ssh-copy-id $@
     fi
     ssh $@
 }
+
+# SSH with auto-tmux
+function ssht {
+    if [ -z "$1" ]; then
+        echo "usage: $0 <hostname>";
+        exit 1;
+    fi
+    $(which ssh) "$@" -t "sh -c 'tmux a || tmux'";
+    exit $?
+}
+
 # With auto completion
-source /usr/share/bash-completion/completions/ssh
-complete -F _ssh sshwc
+if [ -f /usr/share/bash-completion/completions/ssh ]; then
+    source /usr/share/bash-completion/completions/ssh
+    complete -F _ssh sshwc
+    complete -F _ssh ssht
+fi
 
 function ls {
     # Uses second parameter, as ls is automatically aliased to ls --color=auto
