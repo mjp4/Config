@@ -37,3 +37,11 @@ function sshwc {
 source /usr/share/bash-completion/completions/ssh
 complete -F _ssh sshwc
 
+function ls {
+    # Uses second parameter, as ls is automatically aliased to ls --color=auto
+    if [ "$#" -eq 2 ] && [ -f "$2" ]; then
+        less $2
+    else
+        command ls $@
+    fi
+}
