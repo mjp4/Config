@@ -39,6 +39,10 @@ endif
 
 call dein#end()
 
+if dein#check_install()
+  call dein#install()
+endif
+
 function! LongStringFormatter()
     let lnum = v:lnum
     let lcount = v:count
