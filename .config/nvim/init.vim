@@ -47,14 +47,6 @@ endif
 
 function! LongStringFormatter()
     let lnum = v:lnum
-call dein#end()
-
-if dein#check_install()
-  call dein#install()
-endif
-
-function! LongStringFormatter()
-    let lnum = v:lnum
     let lcount = v:count
     let le = lnum + lcount - 1
     let lb = lnum
