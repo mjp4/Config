@@ -4,11 +4,14 @@ set runtimepath^=~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
 call dein#begin(expand('~/.cache/dein'))
 
 call dein#add('Shougo/dein.vim')
+
 call dein#add('Shougo/deoplete.nvim')       " Auto completion
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources = {}
 let g:deoplete#sources.scala = ['buffer', 'tag']
 let g:deoplete#tag#cache_limit_size = 40000000
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 set tags=tags;/
 
 call dein#add('tpope/vim-unimpaired')       " Commands such as [<space> for new line
@@ -23,10 +26,9 @@ call dein#add('christoomey/vim-tmux-navigator') " Support for seamless tmux wind
 call dein#add('vim-airline/vim-airline')    " Pretty status line
 call dein#add('airblade/vim-gitgutter')     " Git changes in gutter
 
-call dein#add('scrooloose/nerdcommenter')   " Better code commenting
+"call dein#add('scrooloose/nerdcommenter')   " Better code commenting
 call dein#add('mjp4/vim-scala')       " Support for scala.
 let g:scala_scaladoc_indent = 1
-"call dein#add('ctrlpvim/ctrlp.vim')
 call dein#add('junegunn/fzf', { 'build': './install', 'merged': 0 })
 call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 call dein#add('edkolev/tmuxline.vim')
@@ -38,6 +40,9 @@ call dein#add('mileszs/ack.vim')
 if executable('ag')
   let g:ackprg = 'ag  --nogroup --nocolor --column'
 endif
+
+call dein#add('christoomey/vim-conflicted')
+" Merge Failure
 
 call dein#end()
 
