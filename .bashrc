@@ -214,4 +214,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
+PATH=$HOME/bin:$PATH
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

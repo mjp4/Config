@@ -30,6 +30,8 @@ let g:scala_scaladoc_indent = 1
 call dein#add('junegunn/fzf', { 'build': './install', 'merged': 0 })
 call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 call dein#add('edkolev/tmuxline.vim')
+call dein#add('ganwell/rst.vim')
+call dein#add('PeterRincker/vim-argumentative')
 call dein#end()
 
 function! LongStringFormatter()
