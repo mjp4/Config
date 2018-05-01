@@ -30,6 +30,13 @@ let g:scala_scaladoc_indent = 1
 call dein#add('junegunn/fzf', { 'build': './install', 'merged': 0 })
 call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 call dein#add('edkolev/tmuxline.vim')
+
+" ack/ag integration
+call dein#add('mileszs/ack.vim')
+if executable('ag')
+  let g:ackprg = 'ag  --nogroup --nocolor --column'
+endif
+
 call dein#end()
 
 function! LongStringFormatter()
