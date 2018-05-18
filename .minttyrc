@@ -13,3 +13,4 @@ BoldBlack=128,128,128
 CursorBlinks=no
 FontHeight=9
 FontIsBold=no
+Scrollbar=none
