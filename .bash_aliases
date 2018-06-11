@@ -42,7 +42,7 @@ function ssht {
         exit 1;
     fi
     $(which ssh) "$@" -t "sh -c 'tmux a || tmux'";
-    exit $?
+    return $?
 }
 
 # With auto completion
