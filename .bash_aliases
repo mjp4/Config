@@ -42,7 +42,7 @@ function ssht {
         exit 1;
     fi
     $(which ssh) "$@" -t "sh -c 'tmux a || tmux'";
-    exit $?
+    return $?
 }
 
 # With auto completion
@@ -59,4 +59,16 @@ function ls {
     else
         command ls $@
     fi
+}
+
+function iplist {
+    for a in `seq $1 $2`; do
+        for b in `seq $3 $4`; do
+            for c in `seq $5 $6`; do
+                for d in `seq $7 $8`; do
+                    echo $a.$b.$c.$d
+                done
+            done
+        done
+    done
 }
