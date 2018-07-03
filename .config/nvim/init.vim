@@ -49,6 +49,8 @@ endif
 call ('christoomey/vim-conflicted')
 " Merge Failure
 call dein#add('craigemery/vim-autotag')
+call dein#add('gioele/vim-autoswap')
+let g:autoswap_detect_tmux = 1
 
 call dein#end()
 
