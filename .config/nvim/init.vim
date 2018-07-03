@@ -34,7 +34,11 @@ call dein#add('junegunn/fzf', { 'build': './install', 'merged': 0 })
 call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 call dein#add('edkolev/tmuxline.vim')
 call dein#add('ganwell/rst.vim')
+
 call dein#add('PeterRincker/vim-argumentative')
+" <, >,  | Shifting arguments
+" [, ],  | Moving between argument boundaries
+" a, i,  | New text objects
 
 " ack/ag integration
 call dein#add('mileszs/ack.vim')
