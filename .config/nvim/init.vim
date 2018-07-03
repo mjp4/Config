@@ -145,6 +145,11 @@ nnoremap <silent> [g :tabprev<cr>
 nnoremap <silent> ]g :tabnext<cr>
 nnoremap <silent> [G :tabfirst<cr>
 nnoremap <silent> ]G :tablast<cr>
+" Iterate through tag preview (overwrites superfluous pasting commands)
+nnoremap <silent> [P :ptprev<cr>
+nnoremap <silent> ]P :ptnext<cr>
+" Shortcut for previewing tags
+nnoremap <silent> <C-[> <C-w>}
 
 filetype plugin on
 filetype plugin indent on
