@@ -258,7 +258,16 @@ tnoremap <C-k> <C-p>
 noremap <silent> <leader>\ :nohlsearch<CR>:Windo ccl<bar>lcl<CR>
 noremap <silent> <leader>v :vsplit<cr>
 
-noremap <C-P> :GitFiles<CR>
+fun! FzfOmniFiles()
+  let is_git = system('git status')
+  if v:shell_error
+    :Files
+  else
+    :GitFiles
+  endif
+endfun
+
+nnoremap <C-p> :call FzfOmniFiles()<CR>
 noremap <M-p> "ayiw:GitFiles<CR><c-\><c-n>"api
 
 " Like windo but restore the current window.
