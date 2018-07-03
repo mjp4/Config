@@ -23,7 +23,10 @@
 [diff]
     tool = vimdiff
 [merge]
-    tool = vimdiff
+	tool = diffconflicts
+[mergetool "diffconflicts"]
+	cmd = diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
+	keepBackup = false
 
 [color]
     diff = auto
