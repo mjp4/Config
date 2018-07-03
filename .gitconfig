@@ -35,3 +35,5 @@
     interactive = auto
     ui = true
     pager = true
+[init]
+	templatedir = ~/.git_template
