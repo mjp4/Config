@@ -21,6 +21,7 @@ call dein#add('tpope/vim-surround')         " For example surround with quotes, 
 call dein#add('tpope/vim-repeat')           " Allows . repeating for more functions
 call dein#add('tpope/vim-abolish')          " Quickly convert cases
 call dein#add('tpope/vim-commentary')       " Comment code using gc{movement}
+call dein#add('tpope/vim-sleuth')           " Automatically use correct indents
 call dein#add('radenling/vim-dispatch-neovim')  " Use neovim terminal with dispatch
 call dein#add('christoomey/vim-tmux-navigator') " Support for seamless tmux window support.
 call dein#add('vim-airline/vim-airline')    " Pretty status line
