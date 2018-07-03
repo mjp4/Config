@@ -48,6 +48,7 @@ endif
 
 call ('christoomey/vim-conflicted')
 " Merge Failure
+call dein#add('craigemery/vim-autotag')
 
 call dein#end()
 
