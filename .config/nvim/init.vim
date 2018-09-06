@@ -26,6 +26,7 @@ call dein#add('radenling/vim-dispatch-neovim')  " Use neovim terminal with dispa
 call dein#add('christoomey/vim-tmux-navigator') " Support for seamless tmux window support.
 call dein#add('vim-airline/vim-airline')    " Pretty status line
 call dein#add('airblade/vim-gitgutter')     " Git changes in gutter
+call dein#add('hynek/vim-python-pep8-indent')  " Modify Vim behaviour to comply with PEP8
 
 "call dein#add('scrooloose/nerdcommenter')   " Better code commenting
 call dein#add('mjp4/vim-scala')       " Support for scala.
@@ -34,6 +35,8 @@ call dein#add('junegunn/fzf', { 'build': './install', 'merged': 0 })
 call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 call dein#add('edkolev/tmuxline.vim')
 call dein#add('ganwell/rst.vim')
+
+call dein#add('AndrewRadev/splitjoin.vim')
 
 call dein#add('PeterRincker/vim-argumentative')
 " <, >,  | Shifting arguments
@@ -45,6 +48,7 @@ call dein#add('mileszs/ack.vim')
 if executable('ag')
   let g:ackprg = 'ag  --nogroup --nocolor --column'
 endif
+cnoreabbrev ag Gcd <bar> Ack!
 
 call dein#add('christoomey/vim-conflicted')
 " Merge Failure
@@ -185,6 +189,8 @@ endfunction
 " END Quickfix toggle
 
 let mapleader=" "
+
+nnoremap <silent> M :silent w \| silent Make<cr>
 
 nnoremap <silent> <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <silent> <leader>sv :source $MYVIMRC<cr>:e<cr>

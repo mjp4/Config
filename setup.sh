@@ -36,7 +36,7 @@ chmod og= $DIR/.ssh/config
 if [ -d $DIR/.vim -a ! -f ~/.vim/bundle/Vundle.vim ]
 then
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    vim -i NONE -c VundleUpdate -c quitall
+    #vim -i NONE -c VundleUpdate -c quitall
 fi
 
 # Install standard desired programs.
