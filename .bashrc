@@ -153,6 +153,8 @@ then
     . /usr/share/git-core/contrib/completion/git-prompt.sh
 fi
 
+GIT_PS1_SHOWUPSTREAM="auto"
+
 export PS1=$IBlack$Time24a\ $White$Host$Color_Off'$(git branch &>/dev/null;\
 if [ $? -eq 0 -a "`type -t __git_ps1`" ]; then \
   echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
@@ -217,3 +219,12 @@ fi
 PATH=$HOME/bin:$PATH
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Automatically run ssh-agent
+# https://unix.stackexchange.com/questions/90853/how-can-i-run-ssh-add-automatically-without-password-prompt
+if [ ! -S ~/.ssh/ssh_auth_sock ]; then
+  eval `ssh-agent`
+  ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+fi
+export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+ssh-add -l > /dev/null || ssh-add
