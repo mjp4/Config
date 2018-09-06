@@ -1,4 +1,3 @@
-#alias covlx3='tmux split-window "ssh -t covlx3 \"tmux -2 attach || tmux -2 new\""'
 alias du1='du --max-depth=1'
 
 # some more ls aliases
@@ -25,14 +24,12 @@ function s {
         fi
 }
 
-alias sshOTPSimulators='sshpass -p !clearwater ssh clearwater@192.168.168.167 -t tmux attach-session -t otp'
-
 # SSH with key-copy
 function sshwc {
     if grep 'Permission denied' <(ssh -o PreferredAuthentications=publickey $@ exit 2>/dev/stdout) > /dev/null; then
-        sshpass -p\!clearwater ssh-copy-id $@ || sshpass -p\!bootstrap ssh-copy-id $@ || ssh-copy-id $@
+        sshpass -p\!clearwater ssh-copy-id mjp4@$@ || sshpass -p\!clearwater ssh-copy-id clearwater@$@ || sshpass -p\!bootstrap ssh-copy-id root@$@ || sshpass -p\!ubuntu ssh-copy-id ubuntu@$@ || ssh-copy-id $@
     fi
-    ssh $@
+    ssh -o PreferredAuthentications=publickey $@ || ssh -o PreferredAuthentications=publickey mjp4@$@ || ssh -o PreferredAuthentications=publickey clearwater@$@ || ssh -o PreferredAuthentications=publickey root@$@ || ssh -o PreferredAuthentications=publickey ubuntu@$@
 }
 
 # SSH with auto-tmux
