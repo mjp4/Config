@@ -69,3 +69,6 @@ function iplist {
         done
     done
 }
+
+# Use cwc-make by default (https://metacom2.metaswitch.com/confluence/x/YYupAg)
+alias make=cwc-make
